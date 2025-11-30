@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/modelo_funcionario.dart';
+import 'package:myapp/models/modelo_funcionario.dart';
 
 class AddEmployeeForm extends StatefulWidget {
   final Function(Employee) onSave;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/modelo_funcionario.dart';
+import 'package:myapp/models/modelo_funcionario.dart';
 
 class EmployeeProvider with ChangeNotifier {
   final List<Employee> _employees = [
@@ -14,7 +14,7 @@ class EmployeeProvider with ChangeNotifier {
 
   void addEmployee(Employee employee) {
     _employees.add(employee);
-    notifyListeners(); // Notifica os widgets que estão ouvindo
+    notifyListeners();
   }
 
   void editEmployee(int index, Employee employee) {
@@ -29,6 +29,24 @@ class EmployeeProvider with ChangeNotifier {
 
   void addDepartment(String department) {
     _departments.add(department);
+    notifyListeners();
+  }
+
+  void editDepartment(int index, String newName) {
+    final oldName = _departments[index];
+    _departments[index] = newName;
+    
+    for (var employee in _employees) {
+      if (employee.department == oldName) {
+        employee.department = newName;
+      }
+    }
+    
+    notifyListeners();
+  }
+
+  void deleteDepartment(int index) {
+    _departments.removeAt(index);
     notifyListeners();
   }
 }
